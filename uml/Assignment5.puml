@@ -1,0 +1,98 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+class InventoryApp extends Application {
+    main(String[]): void
+    start(): void
+}
+
+class InventoryController implements Initializable {
+    -inventory: Inventory
+    -mainPane: Pane
+    -inventoryContainer: VBox
+    -searchBox: TextBox
+    +initialize(URL, ResourceBundle)
+    -addItem()
+    -removeItem()
+    -toggleIsEditing()
+    -confirmEdit()
+    -cancelEdit()
+    -sortBySerialNumber()
+    -sortByName()
+    -sortByValue()
+    -onChangeSearch()
+}
+
+class InventoryRenderer {
+    - {static} currentItem: InventoryItem
+    + {static} rerenderApp(List<InventoryItem>, SortBy, VBox): void
+    - {static} drawTitle(SortBy): HBox
+    - {static} drawItem(InventoryItem): HBox
+    - {static} drawSerialNumber(): Label
+    - {static} drawName(): Label
+    - {static} drawValue(): Label
+    - {static} drawItemEditing(): HBox
+    - {static} drawSerialNumberEditing(): VBox
+    - {static} drawNameEditing(): Vbox
+    - {static} drawValueEditing(): Vbox
+}
+
+class InventoryIOHandler {
+    + {static} writeToFile(Inventory): void
+    + {static} loadFromFile(): Inventory
+    + {static} generateTSV(): String
+    + {static} generateHTML(): String
+    + {static} readTSV(): String
+    + {static} readHTML(): String
+}
+
+class Inventory {
+    -items: List<InventoryItem>
+    -sortBy: SortBy
+    -nextId: Integer
+    'Takes in a filter
+    +getItems(String): List<InventoryItem>
+    +addItems(): void
+    +deleteItem(Integer): void
+    -findItemByID(Integer): InventoryItem
+}
+
+class InventoryItem {
+    -id: Integer
+    'will be changed to true when a submission has been performed
+    -isDirty: boolean
+    -serialNumber: String
+    -name: String
+    -value: Double
+    -isChanging: boolean
+    +InventoryItem(Integer)
+    +setAsDirty(): void
+    +getSerialNumber(): String
+    +setSerialNumber(String): void
+    +validateSerialNumber(): boolean
+    +getName(): String
+    +setName(String): void
+    +validateName(): boolean
+    +getValue(): Double
+    +setValue(Double): void
+    +validateValue(): boolean
+    +getIsChanging(): boolean
+    +setIsChanging(boolean): void
+}
+
+enum SortBy {
+    SERIALNUMBER
+    NAME
+    VALUE
+    NONE
+}
+
+InventoryApp *-- InventoryController
+InventoryController *- InventoryRenderer
+InventoryIOHandler -* InventoryController
+InventoryController *-- Inventory
+Inventory *- InventoryItem
+InventoryRenderer *-- InventoryItem
+
+@enduml
