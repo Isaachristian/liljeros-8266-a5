@@ -91,8 +91,7 @@ enum SortBy {
 InventoryApp *-- InventoryController
 InventoryController *- InventoryRenderer
 InventoryIOHandler -* InventoryController
-InventoryController *-- Inventory
-Inventory *- InventoryItem
-InventoryRenderer *-- InventoryItem
+InventoryController o-- Inventory
+Inventory o- InventoryItem
 
 @enduml

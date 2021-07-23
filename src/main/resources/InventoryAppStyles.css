@@ -1,0 +1,176 @@
+.gridPane {
+    -fx-background-color: white;
+}
+
+.interfaceButtonsContainer {
+    -fx-background-color: white;
+}
+
+.interfaceButtons {
+    -fx-background-color: white transparent transparent transparent;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-font-size: 14px;
+    -fx-padding: 2px;
+}
+
+.text-area .content {
+    -fx-background-color: transparent, white, transparent, white;
+}
+
+.primaryInterfaceButton {
+    -fx-background-color: #6DADC5;
+    -fx-border-width: 1.5px;
+    -fx-border-color: #2F97C1;
+}
+
+.primaryInterfaceButton:hover {
+    -fx-background-color: #2F97C1;
+}
+
+.secondaryInterfaceButton:hover {
+    -fx-background-color: #8AB2BC;
+}
+
+.searchBoxContainer {
+    -fx-padding: 4px 4px 4px 100px;
+}
+
+.searchBox {
+    -fx-background-color: white;
+    -fx-background-radius: 6px;
+    -fx-border-color: lightgrey;
+    -fx-border-radius: 4px;
+    -fx-border-width: 1px;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+.labelsContainer {
+    -fx-background-color: white;
+    -fx-padding: 0px 19px 0px 4px;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: lightgrey;
+}
+
+.labels {
+    -fx-font-size: 14px;
+}
+
+.inventoryContentsScrollPane {
+    -fx-padding: 0px 4px 0px 4px;
+    -fx-background-color: white;
+    -fx-border-width: 0px;
+}
+
+.inventoryContentsScrollPane:focused {
+    -fx-border-width: 0px;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport:focused {
+    -fx-border-width: 0px;
+}
+
+.scroll-bar {
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-border-width: 0;
+}
+
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-border-width: 0;
+    -fx-padding: 0.0 0.0 10.0 0.0;
+
+}
+
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.0em;
+    -fx-padding: 0.0 10.0 0.0 0.0;
+
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow{
+    -fx-shape: " ";
+    -fx-padding: 0.0 0.0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.0 0.0;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: derive(black,90.0%);
+    -fx-background-insets: 0.0, 0.0, 0.0;
+    -fx-background-radius: 5;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color :derive(#4D4C4F,10.0%);
+    -fx-background-insets : 0.0, 0.0, 0.0;
+    -fx-background-radius : 5;
+}
+
+.inventoryContents {
+    -fx-background-color: white;
+    -fx-padding: 4px 0px 4px 0px;
+}
+
+.toggleEditButton {
+    -fx-background-color: white;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+.toggleEditButton:hover {
+    -fx-background-color: #6DADC5;
+}
+
+.confirmButton {
+    -fx-background-color: white;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+
+}
+
+.confirmButton:hover {
+    -fx-background-color: #40DDA6;
+}
+
+.cancelButton {
+    -fx-background-color: white;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+
+}
+
+.cancelButton:hover {
+    -fx-background-color: #F5516D;
+}
+
+.deleteButton {
+    -fx-background-color: #F5516D;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+
+}
+
+.deleteButton:hover {
+    -fx-border-color: red;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+}
+
+.error {
+    -fx-text-fill: red;
+}
