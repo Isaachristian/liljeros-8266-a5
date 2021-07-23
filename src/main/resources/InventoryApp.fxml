@@ -14,7 +14,7 @@
 <?import javafx.scene.control.TextArea?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
           prefWidth="600.0" styleClass="gridPane" xmlns="http://javafx.com/javafx/16"
-          xmlns:fx="http://javafx.com/fxml/1">
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.InventoryController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="150.0" prefWidth="150.0"/>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="300.0" prefWidth="450.0"/>
@@ -25,6 +25,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
+        <!--Add, Import, and Export buttons-->
         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="interfaceButtonsContainer">
             <children>
                 <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0"
@@ -37,6 +38,8 @@
                         translateY="4"/>
             </children>
         </HBox>
+
+        <!--Search Box-->
         <GridPane styleClass="searchBoxContainer" GridPane.columnIndex="1">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
@@ -45,23 +48,11 @@
                 <RowConstraints minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <TextField prefHeight="30.0" styleClass="searchBox"/>
+                <TextField prefHeight="30.0" styleClass="searchBox" fx:id="searchBox"/>
             </children>
         </GridPane>
-        <GridPane GridPane.rowIndex="1" GridPane.columnSpan="2" styleClass="labelsContainer">
-            <columnConstraints>
-                <ColumnConstraints hgrow="ALWAYS" prefWidth="100" minWidth="100"/>
-                <ColumnConstraints hgrow="ALWAYS" prefWidth="10" minWidth="10" maxWidth="10"/>
-                <ColumnConstraints hgrow="ALWAYS" prefWidth="350"/>
-                <ColumnConstraints hgrow="ALWAYS" prefWidth="10" minWidth="10" maxWidth="10"/>
-                <ColumnConstraints hgrow="ALWAYS" prefWidth="120" minWidth="120"/>
-            </columnConstraints>
-            <Label styleClass="labels" GridPane.columnIndex="0" text="Serial Number"/>
-            <Label styleClass="labels" GridPane.columnIndex="1" text="|"/>
-            <Label styleClass="labels" GridPane.columnIndex="2" text="Name"/>
-            <Label styleClass="labels" GridPane.columnIndex="3" text="|"/>
-            <Label styleClass="labels" GridPane.columnIndex="4" text="Value"/>
-        </GridPane>
+
+        <!--Inventory Display-->
         <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" GridPane.columnSpan="2"
                     GridPane.rowIndex="2" styleClass="inventoryContentsScrollPane">
             <content>
@@ -72,13 +63,14 @@
                             <ColumnConstraints hgrow="ALWAYS" prefWidth="10" minWidth="10" maxWidth="10"/>
                             <ColumnConstraints hgrow="ALWAYS" prefWidth="350"/>
                             <ColumnConstraints hgrow="ALWAYS" prefWidth="10" minWidth="10" maxWidth="10"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="90"  minWidth="90"               />
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="30"  minWidth="30"  maxWidth="30"/>
+                            <ColumnConstraints hgrow="ALWAYS" prefWidth="90" minWidth="90"/>
+                            <ColumnConstraints hgrow="ALWAYS" prefWidth="30" minWidth="30" maxWidth="30"/>
                         </columnConstraints>
                         <Label styleClass="labels" GridPane.columnIndex="0" text="12345ABCDE"/>
                         <Label styleClass="labels" GridPane.columnIndex="2" text="This is the name of the item"/>
                         <Label styleClass="labels" GridPane.columnIndex="4" text="20.00"/>
-                        <Button styleClass="toggleEditButton, interfaceButtons" GridPane.columnIndex="5" text="*" prefWidth="30"/>
+                        <Button styleClass="toggleEditButton, interfaceButtons" GridPane.columnIndex="5" text="*"
+                                prefWidth="30"/>
                     </GridPane>
                     <Label text="***this is for spacing***"/>
                     <GridPane>
@@ -97,22 +89,45 @@
                             <RowConstraints vgrow="NEVER" prefHeight="34" minHeight="34" maxHeight="34"/>
                             <RowConstraints vgrow="NEVER" prefHeight="30" minHeight="30" maxHeight="30"/>
                         </rowConstraints>
-                        <TextField  styleClass="searchBox"        GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                        <TextArea   styleClass="searchBox"        GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="3"/>
-                        <TextField  styleClass="searchBox"        GridPane.columnIndex="4" GridPane.rowIndex="0" />
-                        <Button     styleClass="confirmButton, interfaceButtons" GridPane.columnIndex="6" GridPane.rowIndex="0" text="C"
-                                    prefWidth="30" prefHeight="30"/>
-                        <Button     styleClass="cancelButton, interfaceButtons"  GridPane.columnIndex="6" GridPane.rowIndex="1" text="X"
-                                    prefWidth="30" prefHeight="30"/>
-                        <Button     styleClass="deleteButton, interfaceButtons"  GridPane.columnIndex="6" GridPane.rowIndex="2" text="XX"
-                                    prefWidth="30" prefHeight="30"/>
-                        <Label      styleClass="error" GridPane.rowIndex="1" GridPane.columnIndex="0" text="Must be unique!"/>
-                        <Label      styleClass="error" GridPane.rowIndex="3" GridPane.columnIndex="2" text="Must be between 2 and 250 characters!"/>
-                        <Label      styleClass="error" GridPane.rowIndex="1" GridPane.columnIndex="4" text="Must valid amount!"
-                                    GridPane.rowSpan="2" wrapText="true"/>
+                        <TextField styleClass="searchBox" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextArea styleClass="searchBox" GridPane.columnIndex="2" GridPane.rowIndex="0"
+                                  GridPane.rowSpan="3"/>
+                        <TextField styleClass="searchBox" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+                        <Button styleClass="confirmButton, interfaceButtons" GridPane.columnIndex="6"
+                                GridPane.rowIndex="0" text="C"
+                                prefWidth="30" prefHeight="30"/>
+                        <Button styleClass="cancelButton, interfaceButtons" GridPane.columnIndex="6"
+                                GridPane.rowIndex="1" text="X"
+                                prefWidth="30" prefHeight="30"/>
+                        <Button styleClass="deleteButton, interfaceButtons" GridPane.columnIndex="6"
+                                GridPane.rowIndex="2" text="XX"
+                                prefWidth="30" prefHeight="30"/>
+                        <Label styleClass="error" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                               text="Must be unique!"/>
+                        <Label styleClass="error" GridPane.rowIndex="3" GridPane.columnIndex="2"
+                               text="Must be between 2 and 250 characters!"/>
+                        <Label styleClass="error" GridPane.rowIndex="1" GridPane.columnIndex="4"
+                               text="Must valid amount!"
+                               GridPane.rowSpan="2" wrapText="true"/>
                     </GridPane>
                 </VBox>
             </content>
         </ScrollPane>
+
+        <!--Labels-->
+        <GridPane GridPane.rowIndex="1" GridPane.columnSpan="2" styleClass="labelsContainer">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" prefWidth="100" minWidth="100"/>
+                <ColumnConstraints hgrow="ALWAYS" prefWidth="10" minWidth="10" maxWidth="10"/>
+                <ColumnConstraints hgrow="ALWAYS" prefWidth="350"/>
+                <ColumnConstraints hgrow="ALWAYS" prefWidth="10" minWidth="10" maxWidth="10"/>
+                <ColumnConstraints hgrow="ALWAYS" prefWidth="120" minWidth="120"/>
+            </columnConstraints>
+            <Label styleClass="labels" GridPane.columnIndex="0" text="Serial Number"/>
+            <Label styleClass="labels" GridPane.columnIndex="1" text="|"/>
+            <Label styleClass="labels" GridPane.columnIndex="2" text="Name"/>
+            <Label styleClass="labels" GridPane.columnIndex="3" text="|"/>
+            <Label styleClass="labels" GridPane.columnIndex="4" text="Value"/>
+        </GridPane>
     </children>
 </GridPane>

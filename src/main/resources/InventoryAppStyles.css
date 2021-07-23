@@ -9,9 +9,13 @@
 .interfaceButtons {
     -fx-background-color: white transparent transparent transparent;
     -fx-background-radius: 4px;
-    -fx-border-radius: 4px;
+    -fx-border-width: 0px;
     -fx-font-size: 14px;
     -fx-padding: 2px;
+}
+
+.interfaceButtons:focused {
+    -fx-border-width: 0px;
 }
 
 .text-area .content {
@@ -20,8 +24,6 @@
 
 .primaryInterfaceButton {
     -fx-background-color: #6DADC5;
-    -fx-border-width: 1.5px;
-    -fx-border-color: #2F97C1;
 }
 
 .primaryInterfaceButton:hover {
@@ -66,6 +68,75 @@
 .inventoryContentsScrollPane:focused {
     -fx-border-width: 0px;
 }
+
+.inventoryContents {
+    -fx-background-color: white;
+    -fx-padding: 4px 0px 4px 0px;
+}
+
+
+/*
+ * Inventory Item
+ */
+
+.toggleEditButton {
+    -fx-background-color: white;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+.toggleEditButton:hover {
+    -fx-background-color: #6DADC5;
+}
+
+
+/*
+ * Edit Inventory Item
+ */
+
+.confirmButton {
+    -fx-background-color: white;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+
+}
+
+.confirmButton:hover {
+    -fx-background-color: #40DDA6;
+}
+
+.cancelButton {
+    -fx-background-color: white;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+
+}
+
+.cancelButton:hover {
+    -fx-background-color: #F5516D;
+}
+
+.deleteButton {
+    -fx-background-color: #F5516D;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+
+}
+
+.deleteButton:hover {
+    -fx-border-color: red;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+}
+
+.error {
+    -fx-text-fill: red;
+}
+
+
+/*
+ * Change scroll pane scroll bar style
+ */
 
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
@@ -119,58 +190,4 @@
     -fx-background-color :derive(#4D4C4F,10.0%);
     -fx-background-insets : 0.0, 0.0, 0.0;
     -fx-background-radius : 5;
-}
-
-.inventoryContents {
-    -fx-background-color: white;
-    -fx-padding: 4px 0px 4px 0px;
-}
-
-.toggleEditButton {
-    -fx-background-color: white;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
-}
-
-.toggleEditButton:hover {
-    -fx-background-color: #6DADC5;
-}
-
-.confirmButton {
-    -fx-background-color: white;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
-
-}
-
-.confirmButton:hover {
-    -fx-background-color: #40DDA6;
-}
-
-.cancelButton {
-    -fx-background-color: white;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
-
-}
-
-.cancelButton:hover {
-    -fx-background-color: #F5516D;
-}
-
-.deleteButton {
-    -fx-background-color: #F5516D;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
-
-}
-
-.deleteButton:hover {
-    -fx-border-color: red;
-    -fx-border-width: 1px;
-    -fx-border-radius: 4px;
-}
-
-.error {
-    -fx-text-fill: red;
 }
