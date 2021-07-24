@@ -9,61 +9,87 @@ public class InventoryItem {
     private boolean isChanging;
 
     public InventoryItem(Integer id) {
-        
+        this.id = id;
+        this.isDirty = false;
+        this.isChanging = true;
     }
 
-    public void setAsDirty() {
+    public Integer getId() {
+        return this.id;
+    }
 
+    public void markAsDirty() {
+        this.isDirty = true;
+    }
+
+    public Boolean isDirty() {
+        return isDirty;
     }
 
     public String getSerialNumber() {
-
-        return "";
+        return serialNumber;
     }
 
-    public void setSerialNumber(String serialNumber) {
-
+    public void setSerialNumber(String serialNumber) throws IllegalArgumentException {
+        if (validateSerialNumber(serialNumber)) {
+            this.serialNumber = serialNumber;
+        } else {
+            this.serialNumber = serialNumber;
+            throw new IllegalArgumentException("Must be 10 characters long");
+        }
     }
 
-    public boolean validateSerialNumber() {
-
-        return true;
+    public boolean validateSerialNumber(String serialNumber) {
+        return serialNumber != null && serialNumber.length() == 10;
     }
 
     public String getName() {
-
-        return null;
+        return this.name;
     }
 
-    public void setName(String name) {
-
+    public void setName(String name) throws IllegalArgumentException {
+        if (validateName(name)) {
+            this.name = name;
+        } else {
+            this.name = name;
+            throw new IllegalArgumentException("Name must be between 2 and 256 charachters");
+        }
     }
 
-    public boolean validateName() {
-
-        return true;
+    public boolean validateName(String name) {
+        return name != null && name.length() >= 2 && name.length() <= 256;
     }
 
     public Double getValue() {
-
-        return null;
+        return this.value;
     }
 
-    public void setValue(Double value) {
-
+    public String getFormattedValue() {
+        if (value == null) {
+            return "";
+        } else {
+            return String.format("%.2f", value);
+        }
     }
 
-    public boolean validateValue() {
+    public void setValue(Double value) throws IllegalArgumentException {
+        if (this.validateValue(value)) {
+            this.value = value;
+        } else {
+            this.value = value;
+            throw new IllegalArgumentException("Value must be positive");
+        }
+    }
 
-        return true;
+    public boolean validateValue(Double value) {
+        return value >= 0.0;
     }
 
     public boolean getIsChanging() {
-
-        return true;
+        return this.isChanging;
     }
 
     public void setIsChanging(boolean isChanging) {
-
+        this.isChanging = isChanging;
     }
 }

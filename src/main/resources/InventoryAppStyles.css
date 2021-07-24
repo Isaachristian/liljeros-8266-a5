@@ -1,3 +1,7 @@
+/*
+ * General
+ */
+
 .gridPane {
     -fx-background-color: white;
 }
@@ -7,11 +11,21 @@
 }
 
 .interfaceButtons {
-    -fx-background-color: white transparent transparent transparent;
+    -fx-background-color: #e3e3e3 transparent transparent transparent;
     -fx-background-radius: 4px;
     -fx-border-width: 0px;
     -fx-font-size: 14px;
     -fx-padding: 2px;
+}
+
+.interfaceTextInputs {
+    -fx-background-color: white;
+    -fx-background-radius: 6px;
+    -fx-border-color: lightgrey;
+    -fx-border-radius: 4px;
+    -fx-border-width: 1px;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: transparent;
 }
 
 .interfaceButtons:focused {
@@ -34,23 +48,18 @@
     -fx-background-color: #8AB2BC;
 }
 
+
+/*
+ *
+ */
+
 .searchBoxContainer {
     -fx-padding: 4px 4px 4px 100px;
 }
 
-.searchBox {
-    -fx-background-color: white;
-    -fx-background-radius: 6px;
-    -fx-border-color: lightgrey;
-    -fx-border-radius: 4px;
-    -fx-border-width: 1px;
-    -fx-faint-focus-color: transparent;
-    -fx-focus-color: transparent;
-}
-
 .labelsContainer {
     -fx-background-color: white;
-    -fx-padding: 0px 19px 0px 4px;
+    -fx-padding: 0px 15px 0px 4px;
     -fx-border-width: 0px 0px 1px 0px;
     -fx-border-color: lightgrey;
 }
@@ -80,9 +89,9 @@
  */
 
 .toggleEditButton {
-    -fx-background-color: white;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 0px;
 }
 
 .toggleEditButton:hover {
@@ -94,39 +103,16 @@
  * Edit Inventory Item
  */
 
-.confirmButton {
-    -fx-background-color: white;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
-
-}
-
 .confirmButton:hover {
     -fx-background-color: #40DDA6;
-}
-
-.cancelButton {
-    -fx-background-color: white;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
-
 }
 
 .cancelButton:hover {
     -fx-background-color: #F5516D;
 }
 
-.deleteButton {
-    -fx-background-color: #F5516D;
-    -fx-border-radius: 4px;
-    -fx-background-radius: 4px;
-
-}
-
 .deleteButton:hover {
-    -fx-border-color: red;
-    -fx-border-width: 1px;
-    -fx-border-radius: 4px;
+    -fx-background-color: #F5516D;
 }
 
 .error {

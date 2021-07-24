@@ -25,17 +25,17 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
+
         <!--Add, Import, and Export buttons-->
         <HBox prefHeight="100.0" prefWidth="200.0" styleClass="interfaceButtonsContainer">
             <children>
-                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="74.0"
-                        styleClass="interfaceButtons, primaryInterfaceButton" text="Add Item" translateX="4"
-                        translateY="4"/>
-                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0"
-                        styleClass="interfaceButtons, secondaryInterfaceButton" text="I" translateX="8" translateY="4"/>
-                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0"
-                        styleClass="interfaceButtons, secondaryInterfaceButton" text="E" translateX="12"
-                        translateY="4"/>
+                <Button prefHeight="30.0" prefWidth="74.0" translateX="4" translateY="4"
+                        styleClass="interfaceButtons, primaryInterfaceButton" text="Add Item"
+                        onMouseClicked="#addItem"/>
+                <Button fx:id="importButton" prefHeight="30.0" prefWidth="30.0" translateX="8" translateY="4"
+                        styleClass="interfaceButtons, secondaryInterfaceButton" onMouseClicked="#importInventory"/>
+                <Button fx:id="exportButton" prefHeight="30.0" prefWidth="30.0" translateX="12" translateY="4"
+                        styleClass="interfaceButtons, secondaryInterfaceButton" onMouseClicked="#exportInventory"/>
             </children>
         </HBox>
 
@@ -48,15 +48,17 @@
                 <RowConstraints minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <TextField prefHeight="30.0" styleClass="searchBox" fx:id="searchBox"/>
+                <TextField prefHeight="30.0" styleClass="interfaceTextInputs" fx:id="searchBox"/>
             </children>
         </GridPane>
 
         <!--Inventory Display-->
         <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" GridPane.columnSpan="2"
-                    GridPane.rowIndex="2" styleClass="inventoryContentsScrollPane">
+                    GridPane.rowIndex="2" styleClass="inventoryContentsScrollPane" fitToWidth="true">
             <content>
-                <VBox prefHeight="800.0" prefWidth="578.0" fx:id="inventoryContents" styleClass="inventoryContents">
+                <VBox prefWidth="578.0" fx:id="inventoryContents" styleClass="inventoryContents">
+
+                    <!--Item-->
                     <GridPane>
                         <columnConstraints>
                             <ColumnConstraints hgrow="ALWAYS" prefWidth="100" minWidth="100"/>
@@ -72,27 +74,32 @@
                         <Button styleClass="toggleEditButton, interfaceButtons" GridPane.columnIndex="5" text="*"
                                 prefWidth="30"/>
                     </GridPane>
+
+                    <!--Spacing-->
                     <Label text="***this is for spacing***"/>
+
+                    <!--Editing Item-->
                     <GridPane>
                         <columnConstraints>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="100" minWidth="100"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="10" minWidth="10" maxWidth="10"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="350"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="10" minWidth="10" maxWidth="10"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="80" minWidth="80"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="10" minWidth="10" maxWidth="10"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="30" minWidth="30" maxWidth="30"/>
+                            <ColumnConstraints hgrow="ALWAYS" prefWidth="100" minWidth="100"              />
+                            <ColumnConstraints hgrow="ALWAYS" prefWidth="10"  minWidth="10"  maxWidth="10"/>
+                            <ColumnConstraints hgrow="ALWAYS" prefWidth="350"                             />
+                            <ColumnConstraints hgrow="ALWAYS" prefWidth="10"  minWidth="10"  maxWidth="10"/>
+                            <ColumnConstraints hgrow="ALWAYS" prefWidth="80"  minWidth="80"               />
+                            <ColumnConstraints hgrow="ALWAYS" prefWidth="10"  minWidth="10"  maxWidth="10"/>
+                            <ColumnConstraints hgrow="ALWAYS" prefWidth="30"  minWidth="30"  maxWidth="30"/>
                         </columnConstraints>
                         <rowConstraints>
                             <RowConstraints vgrow="NEVER" prefHeight="34" minHeight="34" maxHeight="34"/>
                             <RowConstraints vgrow="NEVER" prefHeight="34" minHeight="34" maxHeight="34"/>
                             <RowConstraints vgrow="NEVER" prefHeight="34" minHeight="34" maxHeight="34"/>
-                            <RowConstraints vgrow="NEVER" prefHeight="30" minHeight="30" maxHeight="30"/>
                         </rowConstraints>
-                        <TextField styleClass="searchBox" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                        <TextArea styleClass="searchBox" GridPane.columnIndex="2" GridPane.rowIndex="0"
+
+
+                        <TextField styleClass="interfaceTextInputs" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <TextArea styleClass="interfaceTextInputs" GridPane.columnIndex="2" GridPane.rowIndex="0"
                                   GridPane.rowSpan="3"/>
-                        <TextField styleClass="searchBox" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+                        <TextField styleClass="interfaceTextInputs" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
                         <Button styleClass="confirmButton, interfaceButtons" GridPane.columnIndex="6"
                                 GridPane.rowIndex="0" text="C"
                                 prefWidth="30" prefHeight="30"/>
@@ -102,13 +109,8 @@
                         <Button styleClass="deleteButton, interfaceButtons" GridPane.columnIndex="6"
                                 GridPane.rowIndex="2" text="XX"
                                 prefWidth="30" prefHeight="30"/>
-                        <Label styleClass="error" GridPane.rowIndex="1" GridPane.columnIndex="0"
-                               text="Must be unique!"/>
-                        <Label styleClass="error" GridPane.rowIndex="3" GridPane.columnIndex="2"
-                               text="Must be between 2 and 250 characters!"/>
-                        <Label styleClass="error" GridPane.rowIndex="1" GridPane.columnIndex="4"
-                               text="Must valid amount!"
-                               GridPane.rowSpan="2" wrapText="true"/>
+
+
                     </GridPane>
                 </VBox>
             </content>
