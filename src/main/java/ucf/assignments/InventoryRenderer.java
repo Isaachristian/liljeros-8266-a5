@@ -1,5 +1,7 @@
 package ucf.assignments;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -9,16 +11,24 @@ public class InventoryRenderer {
     Inventory inventory;
     VBox inventoryContent;
     TextField searchBox;
-    
-    public InventoryRenderer(Inventory inventory, TextField searchBox, VBox inventoryContent) {
+    Label[] headerLabels;
+
+    public InventoryRenderer(Inventory inventory, TextField searchBox, VBox inventoryContent, Label[] headerLabels) {
         this.inventory = inventory;
         this.searchBox = searchBox;
         this.inventoryContent = inventoryContent;
+        this.headerLabels = headerLabels;
     }
 
-    public  void rerenderApp(String filter, VBox inventoryContainer) {
+    public void rerenderApp(String filter, VBox inventoryContainer) {
         inventoryContainer.getChildren().clear();
 
+        // Update sort by selection
+        for (int i = 0; i < headerLabels.length; i++) {
+            headerLabels[i].setUnderline(i == inventory.getSortBy().ordinal());
+        }
+
+        // draw items
         for (InventoryItem inventoryItem : inventory.getItems(filter)) {
             if (inventoryItem.getIsChanging()) {
                 inventoryContainer.getChildren().add(drawEditingItem(inventoryItem));
@@ -28,7 +38,7 @@ public class InventoryRenderer {
         }
     }
 
-    private  GridPane drawItem(InventoryItem inventoryItem) {
+    private GridPane drawItem(InventoryItem inventoryItem) {
         GridPane item = new GridPane();
 
         item.setAlignment(Pos.TOP_LEFT);
@@ -36,12 +46,12 @@ public class InventoryRenderer {
         // generate column constraints
         item.getColumnConstraints().addAll(
                 generateColumnConstraint(100.0, 100.0, null),
-                generateColumnConstraint( 10.0,  10.0, 10.0),
-                generateColumnConstraint(350.0,  null, null),
-                generateColumnConstraint( 10.0,  10.0, 10.0),
-                generateColumnConstraint( 80.0,  80.0, null),
-                generateColumnConstraint( 10.0,  10.0, 10.0),
-                generateColumnConstraint( 30.0,  30.0, 30.0)
+                generateColumnConstraint(10.0, 10.0, 10.0),
+                generateColumnConstraint(350.0, null, null),
+                generateColumnConstraint(10.0, 10.0, 10.0),
+                generateColumnConstraint(80.0, 80.0, null),
+                generateColumnConstraint(10.0, 10.0, 10.0),
+                generateColumnConstraint(30.0, 30.0, 30.0)
         );
 
         // generate row constraints
@@ -57,7 +67,7 @@ public class InventoryRenderer {
         return item;
     }
 
-    private  Label drawLabel(String title, Integer minWidth) {
+    private Label drawLabel(String title, Integer minWidth) {
         Label label = new Label();
         label.setText(title);
         label.getStyleClass().add("labels");
@@ -77,21 +87,23 @@ public class InventoryRenderer {
         button.setText("\u22EF");
         button.setTranslateX(-2);
         button.setOnMouseClicked(event -> {
-            inventoryItem.setIsChanging(true);
-            rerenderApp(searchBox.getText(), inventoryContent);
+            if (!inventory.isItemBeingEdited()) {
+                inventoryItem.setIsChanging(true);
+                rerenderApp(searchBox.getText(), inventoryContent);
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Already editing an item").show();
+            }
         });
         return button;
     }
 
-    private  GridPane drawEditingItem(InventoryItem inventoryItem) {
-        System.out.println(" Now drawing item being edited");
+    private GridPane drawEditingItem(InventoryItem inventoryItem) {
         GridPane editingItem = new GridPane();
 
         editingItem.setStyle("-fx-padding: 2px");
 
         // generate row constraints
         editingItem.getRowConstraints().addAll(
-                generateRowConstraint(34.0, 34.0, 34.0),
                 generateRowConstraint(34.0, 34.0, 34.0),
                 generateRowConstraint(34.0, 34.0, 34.0)
         );
@@ -109,11 +121,10 @@ public class InventoryRenderer {
 
         // add elements to grid
         editingItem.add(drawSerialNumberEditing(inventoryItem), 0, 0, 1, 1);
-        editingItem.add(drawNameEditing(inventoryItem), 2, 0, 1, 3);
+        editingItem.add(drawNameEditing(inventoryItem), 2, 0, 1, 2);
         editingItem.add(drawValueEditing(inventoryItem), 4, 0, 1, 1);
         editingItem.add(drawConfirmButton(inventoryItem), 6, 0, 1, 1);
-        editingItem.add(drawCancelButton(), 6, 1, 1, 1);
-        editingItem.add(drawDeleteButton(), 6, 2, 1, 1);
+        editingItem.add(drawDeleteButton(inventory, inventoryItem.getId()), 6, 1, 1, 1);
 
         editingItem.setId(inventoryItem.getId().toString());
 
@@ -121,37 +132,67 @@ public class InventoryRenderer {
     }
 
 
-    private  TextField drawSerialNumberEditing(InventoryItem inventoryItem) {
+    private TextField drawSerialNumberEditing(InventoryItem inventoryItem) {
         TextField tf = new TextField();
         tf.setUserData("serialnumber");
         tf.setText(inventoryItem.getSerialNumber());
         tf.getStyleClass().add("interfaceTextInputs");
         tf.setStyle("-fx-min-height: 34px; -fx-min-width: 100px");
 
+        // Restrict inputs to only numbers and letters
+        tf.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("^[A-Za-z0-9]{0,10}$")) {
+                    tf.setText(oldValue);
+                }
+            }
+        });
+
         return tf;
     }
 
-    private  TextArea drawNameEditing(InventoryItem inventoryItem) {
+    private TextArea drawNameEditing(InventoryItem inventoryItem) {
         TextArea ta = new TextArea();
         ta.setText(inventoryItem.getName());
         ta.setWrapText(true);
+
+        // dont allow tabs
+        ta.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("[^\\t]*$")) {
+                    ta.setText(oldValue);
+                }
+            }
+        });
 
         ta.getStyleClass().add("interfaceTextInputs");
 
         return ta;
     }
 
-    private  TextField drawValueEditing(InventoryItem inventoryItem) {
+    private TextField drawValueEditing(InventoryItem inventoryItem) {
         TextField tf = new TextField();
-        tf.setText(inventoryItem.getFormattedValue());
+        tf.setText(inventoryItem.getValue());
         tf.setUserData("value");
         tf.getStyleClass().add("interfaceTextInputs");
         tf.setStyle("-fx-min-height: 34px; -fx-min-width: 80px");
 
+        // only allow numbers and a single decimal
+        tf.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("^[0-9]*\\.?[0-9]{0,2}$")) {
+                    tf.setText(oldValue);
+                }
+            }
+        });
+
         return tf;
     }
 
-    private  Button drawConfirmButton(InventoryItem inventoryItem) {
+    private Button drawConfirmButton(InventoryItem inventoryItem) {
         Button btn = new Button();
         btn.setText("\u2714");
         btn.setPrefWidth(30);
@@ -168,7 +209,14 @@ public class InventoryRenderer {
                 if (node instanceof TextField tf) {
                     if (node.getUserData().equals("serialnumber")) {
                         try {
-                            inventoryItem.setSerialNumber(tf.getText());
+                            if (inventory.isUniqueSerialNumber(inventoryItem.getId(), tf.getText())) {
+                                inventoryItem.setSerialNumber(tf.getText());
+                            } else {
+                                inventoryItem.setSerialNumber(tf.getText());
+                                Alert alert = new Alert(Alert.AlertType.ERROR, "Serial Number must be unique");
+                                alert.show();
+                                isValid = false;
+                            }
                         } catch (IllegalArgumentException e) {
                             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                             alert.show();
@@ -213,28 +261,21 @@ public class InventoryRenderer {
         return btn;
     }
 
-    private  Button drawCancelButton() {
-        Button btn = new Button();
-        btn.setText("\uD83E\uDC14");
-        btn.setPrefWidth(30);
-        btn.setPrefHeight(30);
-        btn.setStyle("-fx-font-size: 16pt; -fx-padding: 0px");
-        btn.getStyleClass().addAll("cancelButton", "interfaceButtons");
-
-        return btn;
-    }
-
-    private  Button drawDeleteButton() {
+    private Button drawDeleteButton(Inventory inventory, Integer id) {
         Button btn = new Button();
         btn.setText("\u274C");
         btn.setPrefWidth(30);
         btn.setPrefHeight(30);
         btn.getStyleClass().addAll("deleteButton", "interfaceButtons");
+        btn.setOnMouseClicked(event -> {
+            inventory.deleteItem(id);
+            rerenderApp(searchBox.getText(), inventoryContent);
+        });
 
         return btn;
     }
 
-    private  ColumnConstraints generateColumnConstraint(double prefWidth, Double minWidth, Double maxWidth) {
+    private ColumnConstraints generateColumnConstraint(double prefWidth, Double minWidth, Double maxWidth) {
         ColumnConstraints cc = new ColumnConstraints();
         cc.setHgrow(Priority.SOMETIMES);
         cc.setPrefWidth(prefWidth);
@@ -248,7 +289,7 @@ public class InventoryRenderer {
         return cc;
     }
 
-    private  RowConstraints generateRowConstraint(Double prefHeight, Double minHeight, Double maxHeight) {
+    private RowConstraints generateRowConstraint(Double prefHeight, Double minHeight, Double maxHeight) {
         RowConstraints rc = new RowConstraints();
         rc.setVgrow(Priority.NEVER);
         if (prefHeight != null) {

@@ -50,23 +50,51 @@
 
 
 /*
- *
+ * Search
  */
 
 .searchBoxContainer {
-    -fx-padding: 4px 4px 4px 100px;
+    -fx-padding: 4px 4px 4px 4px;
 }
 
-.labelsContainer {
+.searchBoxLabel {
+    -fx-alignment: CENTER_RIGHT;
+    -fx-padding: 4px 8px 4px 4px;
+    -fx-font-size: 16px;
+}
+
+
+/*
+ * Labels
+ */
+
+.headerLabelsContainer {
     -fx-background-color: white;
     -fx-padding: 0px 15px 0px 4px;
     -fx-border-width: 0px 0px 1px 0px;
     -fx-border-color: lightgrey;
+    -fx-alignment: CENTER;
+}
+
+.headerLabels {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.headerLabelSelected {
+    -fx-underline: true;
+}
+
+.headerLabels:hover {
+    -fx-text-fill: grey;
+    -fx-cursor: hand;
 }
 
 .labels {
     -fx-font-size: 14px;
 }
+
+
 
 .inventoryContentsScrollPane {
     -fx-padding: 0px 4px 0px 4px;

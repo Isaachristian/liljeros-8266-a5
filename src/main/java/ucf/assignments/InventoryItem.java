@@ -12,6 +12,8 @@ public class InventoryItem {
         this.id = id;
         this.isDirty = false;
         this.isChanging = true;
+        this.serialNumber = "";
+        this.name = "";
     }
 
     public Integer getId() {
@@ -60,16 +62,24 @@ public class InventoryItem {
         return name != null && name.length() >= 2 && name.length() <= 256;
     }
 
-    public Double getValue() {
-        return this.value;
+    public String getValue() {
+        if (value == null) {
+            return "";
+        } else {
+            return String.format("%.2f", value);
+        }
     }
 
     public String getFormattedValue() {
         if (value == null) {
             return "";
         } else {
-            return String.format("%.2f", value);
+            return String.format("$%.2f", value);
         }
+    }
+
+    public double getValueAsDouble() {
+        return this.value;
     }
 
     public void setValue(Double value) throws IllegalArgumentException {
