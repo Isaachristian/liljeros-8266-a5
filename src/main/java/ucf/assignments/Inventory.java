@@ -1,3 +1,8 @@
+/*
+ *  UCF COP3330 Summer 2021 Assignment 5 Solution
+ *  Copyright 2021 Isaac Liljeros
+ */
+
 package ucf.assignments;
 
 import java.util.Comparator;
@@ -37,17 +42,29 @@ public class Inventory {
     }
 
     // for use with importing file
-    public void addItem(String serialNumber, String name, double value) {
-        InventoryItem inventoryItem = new InventoryItem(nextId++);
-        inventoryItem.markAsDirty();
+    public void addItem(String serialNumber, String name, double value, Integer id) {
+        InventoryItem inventoryItem = new InventoryItem(id);
         inventoryItem.setSerialNumber(serialNumber);
         inventoryItem.setName(name);
         inventoryItem.setValue(value);
+        inventoryItem.setIsChanging(false);
         items.add(inventoryItem);
+
+        // find next id
+        Integer nextId = 0;
+        for (InventoryItem item : items) {
+            if (item.getId() >= nextId) {
+                nextId = item.getId() + 1;
+            }
+        }
     }
 
     public void deleteItem(Integer id) {
         items.remove(findItemByID(id));
+    }
+
+    public void deleteAllItems() {
+        items.clear();
     }
 
     private InventoryItem findItemByID(Integer id) {

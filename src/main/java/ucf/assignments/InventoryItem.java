@@ -1,16 +1,19 @@
+/*
+ *  UCF COP3330 Summer 2021 Assignment 5 Solution
+ *  Copyright 2021 Isaac Liljeros
+ */
+
 package ucf.assignments;
 
 public class InventoryItem {
-    private Integer id;
-    private boolean isDirty; // will be changed to true when a submission has been performed
+    private final Integer id;
     private String serialNumber;
     private String name;
     private Double value;
-    private boolean isChanging;
+    private Boolean isChanging;
 
     public InventoryItem(Integer id) {
         this.id = id;
-        this.isDirty = false;
         this.isChanging = true;
         this.serialNumber = "";
         this.name = "";
@@ -18,14 +21,6 @@ public class InventoryItem {
 
     public Integer getId() {
         return this.id;
-    }
-
-    public void markAsDirty() {
-        this.isDirty = true;
-    }
-
-    public Boolean isDirty() {
-        return isDirty;
     }
 
     public String getSerialNumber() {
@@ -54,7 +49,7 @@ public class InventoryItem {
             this.name = name;
         } else {
             this.name = name;
-            throw new IllegalArgumentException("Name must be between 2 and 256 charachters");
+            throw new IllegalArgumentException("Name must be between 2 and 256 characters");
         }
     }
 

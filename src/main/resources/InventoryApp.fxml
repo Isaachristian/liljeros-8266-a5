@@ -59,63 +59,7 @@
         <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" GridPane.columnSpan="2"
                     GridPane.rowIndex="2" styleClass="inventoryContentsScrollPane" fitToWidth="true">
             <content>
-                <VBox prefWidth="578.0" fx:id="inventoryContents" styleClass="inventoryContents">
-
-                    <!--Item-->
-                    <GridPane>
-                        <columnConstraints>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="100" minWidth="100"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="10" minWidth="10" maxWidth="10"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="350"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="10" minWidth="10" maxWidth="10"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="90" minWidth="90"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="30" minWidth="30" maxWidth="30"/>
-                        </columnConstraints>
-                        <Label styleClass="labels" GridPane.columnIndex="0" text="12345ABCDE"/>
-                        <Label styleClass="labels" GridPane.columnIndex="2" text="This is the name of the item"/>
-                        <Label styleClass="labels" GridPane.columnIndex="4" text="20.00"/>
-                        <Button styleClass="toggleEditButton, interfaceButtons" GridPane.columnIndex="5" text="*"
-                                prefWidth="30"/>
-                    </GridPane>
-
-                    <!--Spacing-->
-                    <Label text="***this is for spacing***"/>
-
-                    <!--Editing Item-->
-                    <GridPane>
-                        <columnConstraints>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="100" minWidth="100"              />
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="10"  minWidth="10"  maxWidth="10"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="350"                             />
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="10"  minWidth="10"  maxWidth="10"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="80"  minWidth="80"               />
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="10"  minWidth="10"  maxWidth="10"/>
-                            <ColumnConstraints hgrow="ALWAYS" prefWidth="30"  minWidth="30"  maxWidth="30"/>
-                        </columnConstraints>
-                        <rowConstraints>
-                            <RowConstraints vgrow="NEVER" prefHeight="34" minHeight="34" maxHeight="34"/>
-                            <RowConstraints vgrow="NEVER" prefHeight="34" minHeight="34" maxHeight="34"/>
-                            <RowConstraints vgrow="NEVER" prefHeight="34" minHeight="34" maxHeight="34"/>
-                        </rowConstraints>
-
-
-                        <TextField styleClass="interfaceTextInputs" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                        <TextArea styleClass="interfaceTextInputs" GridPane.columnIndex="2" GridPane.rowIndex="0"
-                                  GridPane.rowSpan="3"/>
-                        <TextField styleClass="interfaceTextInputs" GridPane.columnIndex="4" GridPane.rowIndex="0"/>
-                        <Button styleClass="confirmButton, interfaceButtons" GridPane.columnIndex="6"
-                                GridPane.rowIndex="0" text="C"
-                                prefWidth="30" prefHeight="30"/>
-                        <Button styleClass="cancelButton, interfaceButtons" GridPane.columnIndex="6"
-                                GridPane.rowIndex="1" text="X"
-                                prefWidth="30" prefHeight="30"/>
-                        <Button styleClass="deleteButton, interfaceButtons" GridPane.columnIndex="6"
-                                GridPane.rowIndex="2" text="XX"
-                                prefWidth="30" prefHeight="30"/>
-
-
-                    </GridPane>
-                </VBox>
+                <VBox prefWidth="578.0" fx:id="inventoryContents" styleClass="inventoryContents"/>
             </content>
         </ScrollPane>
 

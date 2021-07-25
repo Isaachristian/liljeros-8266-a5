@@ -1,3 +1,8 @@
+/*
+ *  UCF COP3330 Summer 2021 Assignment 5 Solution
+ *  Copyright 2021 Isaac Liljeros
+ */
+
 package ucf.assignments;
 
 import javafx.beans.value.ChangeListener;
@@ -200,8 +205,6 @@ public class InventoryRenderer {
         btn.getStyleClass().addAll("confirmButton", "interfaceButtons");
 
         btn.setOnMouseClicked(event -> {
-            System.out.println("Saving Item with ID: " + inventoryItem.getId());
-
             // Attempt to set data
             Boolean isValid = true;
             GridPane editingItem = ((GridPane) ((Button) event.getSource()).getParent());
@@ -246,9 +249,6 @@ public class InventoryRenderer {
                     }
                 }
             }
-
-            // Mark as dirty to activate error messages (if needed)
-            inventoryItem.markAsDirty();
 
             // if all valid,
             if (isValid.equals(true)) {
