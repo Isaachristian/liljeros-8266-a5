@@ -43,20 +43,23 @@ public class Inventory {
 
     // for use with importing file
     public void addItem(String serialNumber, String name, double value, Integer id) {
-        InventoryItem inventoryItem = new InventoryItem(id);
-        inventoryItem.setSerialNumber(serialNumber);
-        inventoryItem.setName(name);
-        inventoryItem.setValue(value);
-        inventoryItem.setIsChanging(false);
-        items.add(inventoryItem);
+        if (isUniqueSerialNumber(id, serialNumber)) {
+            InventoryItem inventoryItem = new InventoryItem(id);
+            inventoryItem.setSerialNumber(serialNumber);
+            inventoryItem.setName(name);
+            inventoryItem.setValue(value);
+            inventoryItem.setIsChanging(false);
+            items.add(inventoryItem);
 
-        // find next id
-        Integer nextId = 0;
-        for (InventoryItem item : items) {
-            if (item.getId() >= nextId) {
-                nextId = item.getId() + 1;
+            // find next id
+            Integer nextId = 0;
+            for (InventoryItem item : items) {
+                if (item.getId() >= nextId) {
+                    nextId = item.getId() + 1;
+                    this.nextId = nextId;
+                }
             }
-        }
+        } else throw new IllegalArgumentException("Serial Number must be unique");
     }
 
     public void deleteItem(Integer id) {

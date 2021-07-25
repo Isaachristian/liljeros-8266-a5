@@ -76,13 +76,14 @@ public class InventoryIOHandler {
         fileContents.append("<table>\n");
 
         for (InventoryItem item : items) {
-            fileContents.append(String.format(
-                    "<tr>\n" +
-                    "<td>%s</td>\n" +
-                    "<td>%s</td>\n" +
-                    "<td>%s</td>\n" +
-                    "<td>%s</td>\n" +
-                    "</tr>\n",
+            fileContents.append(String.format("""
+                                    <tr>
+                                    <td>%s</td>
+                                    <td>%s</td>
+                                    <td>%s</td>
+                                    <td>%s</td>
+                                    </tr>
+                                    """,
                     item.getSerialNumber(), item.getName(), item.getValue(), item.getId()));
         }
 
